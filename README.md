@@ -14,8 +14,8 @@ No providers.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_codebuild"></a> [codebuild](#module\_codebuild) | git::https://github.com/nexient-llc/fork_terraform-aws-codebuild | 0.1.0 |
-| <a name="module_resource_names"></a> [resource\_names](#module\_resource\_names) | git::https://github.com/nexient-llc/tf-module-resource_name | 0.1.0 |
+| <a name="module_codebuild"></a> [codebuild](#module\_codebuild) | git::https://github.com/nexient-llc/terraform-aws-codebuild | 0.2.0 |
+| <a name="module_resource_names"></a> [resource\_names](#module\_resource\_names) | git::https://github.com/nexient-llc/tf-module-resource_name | 0.3.0 |
 
 ## Resources
 
@@ -53,6 +53,12 @@ No resources.
 | <a name="input_pipeline_name"></a> [pipeline\_name](#input\_pipeline\_name) | Pipeline that created the codebuild. | `string` | `null` | no |
 | <a name="input_secondary_sources"></a> [secondary\_sources](#input\_secondary\_sources) | (Optional) secondary source for the codebuild project in addition to the primary location | <pre>list(object(<br>    {<br>      git_clone_depth     = number<br>      location            = string<br>      source_identifier   = string<br>      type                = string<br>      fetch_submodules    = bool<br>      insecure_ssl        = bool<br>      report_build_status = bool<br>  }))</pre> | `[]` | no |
 | <a name="input_build_image_pull_credentials_type"></a> [build\_image\_pull\_credentials\_type](#input\_build\_image\_pull\_credentials\_type) | Type of credentials AWS CodeBuild uses to pull images in your build.Valid values: CODEBUILD, SERVICE\_ROLE. When you use a cross-account or private registry image, you must use SERVICE\_ROLE credentials. | `string` | `"CODEBUILD"` | no |
+| <a name="input_github_token"></a> [github\_token](#input\_github\_token) | (Optional) GitHub auth token environment variable (`GITHUB_TOKEN`). Required if enable\_github\_authentication=true | `string` | `""` | no |
+| <a name="input_github_token_type"></a> [github\_token\_type](#input\_github\_token\_type) | Storage type of GITHUB\_TOKEN environment variable (`PARAMETER_STORE`, `PLAINTEXT`, `SECRETS_MANAGER`) | `string` | `"SECRETS_MANAGER"` | no |
+| <a name="input_enable_github_authentication"></a> [enable\_github\_authentication](#input\_enable\_github\_authentication) | Whether to enable Github authentication using Personal Access token.<br>    If true, it uses the github\_token  and github\_token\_type must be of type SECRETS\_MANAGER to authenticate | `bool` | `false` | no |
+| <a name="input_create_webhooks"></a> [create\_webhooks](#input\_create\_webhooks) | Whether to create webhooks for Github, GitHub Enterprise or Bitbucket | `bool` | `false` | no |
+| <a name="input_webhook_build_type"></a> [webhook\_build\_type](#input\_webhook\_build\_type) | Webhook build type. Choose between BUILD or BUILD\_BATCH | `string` | `"BUILD"` | no |
+| <a name="input_webhook_filters"></a> [webhook\_filters](#input\_webhook\_filters) | Filters supported by webhook. EVENT, BASE\_REF, HEAD\_REF, ACTOR\_ACCOUNT\_ID, FILE\_PATH, COMMIT\_MESSAGE | `map(string)` | `{}` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | A map of tags to add to the resources created by the module. | `map(string)` | `{}` | no |
 
 ## Outputs

@@ -11,7 +11,7 @@
 // limitations under the License.
 
 module "codebuild" {
-  source = "git::https://github.com/nexient-llc/fork_terraform-aws-codebuild?ref=0.1.0"
+  source = "git::https://github.com/nexient-llc/terraform-aws-codebuild?ref=0.2.0"
   count  = var.create_projects ? length(var.codebuild_projects) : 0
 
   project_name = replace(module.resource_names["codebuild"].standard, var.naming_prefix, "${var.naming_prefix}_${var.codebuild_projects[count.index].name}")
@@ -35,15 +35,24 @@ module "codebuild" {
 
   build_image_pull_credentials_type = try(var.codebuild_projects[count.index].build_image_pull_credentials_type, var.build_image_pull_credentials_type)
 
-  codebuild_iam = jsonencode(try(var.codebuild_projects[count.index].codebuild_iam, var.codebuild_iam))
+  codebuild_iam = try(var.codebuild_projects[count.index].codebuild_iam, var.codebuild_iam)
 
   environment_variables = try(var.codebuild_projects[count.index].environment_variables, var.environment_variables)
+
+  # Will authenticate with Github by using variable github_token
+  enable_github_authentication = var.enable_github_authentication
+  create_webhooks              = var.create_webhooks
+  # If set, this will automatically create an environment variable by name GITHUB_TOKEN
+  github_token       = var.github_token
+  github_token_type  = var.github_token_type
+  webhook_filters    = var.webhook_filters
+  webhook_build_type = var.webhook_build_type
 
   tags = merge(local.tags, { resource_name = replace(module.resource_names["codebuild"].standard, var.naming_prefix, "${var.naming_prefix}_${var.codebuild_projects[count.index].name}") })
 }
 
 module "resource_names" {
-  source = "git::https://github.com/nexient-llc/tf-module-resource_name?ref=0.1.0"
+  source = "git::https://github.com/nexient-llc/tf-module-resource_name?ref=0.3.0"
 
   for_each = var.resource_names_map
 
