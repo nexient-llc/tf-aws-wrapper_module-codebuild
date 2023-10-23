@@ -52,7 +52,7 @@ module "codebuild" {
 }
 
 module "resource_names" {
-  source = "git::https://github.com/nexient-llc/tf-module-resource_name?ref=0.3.0"
+  source = "git::https://github.com/nexient-llc/tf-module-resource_name?ref=0.1.0"
 
   for_each = var.resource_names_map
 
