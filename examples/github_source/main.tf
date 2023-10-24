@@ -13,18 +13,18 @@
 module "codebuild" {
   source = "../.."
 
-  name                          = var.name
-  naming_prefix                 = var.naming_prefix
-  source_type                   = var.source_type
-  artifact_type                 = var.artifact_type
-  source_location               = var.source_location
-  buildspec                     = var.buildspec
-  codebuild_iam                 = var.codebuild_iam
-  enable_github_authentication  = var.enable_github_authentication
-  create_webhooks               = var.create_webhooks
-  github_token                  = var.github_token
-  github_token_type             = var.github_token_type
-  webhook_filters               = var.webhook_filters
+  name                         = var.name
+  naming_prefix                = var.naming_prefix
+  source_type                  = var.source_type
+  artifact_type                = var.artifact_type
+  source_location              = var.source_location
+  buildspec                    = var.buildspec
+  codebuild_iam                = var.codebuild_iam
+  enable_github_authentication = var.enable_github_authentication
+  create_webhooks              = var.create_webhooks
+  github_token                 = var.github_token
+  github_token_type            = var.github_token_type
+  webhook_filters              = var.webhook_filters
 
   tags = var.tags
 }

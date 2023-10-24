@@ -15,7 +15,7 @@ No providers.
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_codebuild"></a> [codebuild](#module\_codebuild) | git::https://github.com/nexient-llc/terraform-aws-codebuild | 0.2.0 |
-| <a name="module_resource_names"></a> [resource\_names](#module\_resource\_names) | git::https://github.com/nexient-llc/tf-module-resource_name | 0.3.0 |
+| <a name="module_resource_names"></a> [resource\_names](#module\_resource\_names) | git::https://github.com/nexient-llc/tf-module-resource_name | 0.1.0 |
 
 ## Resources
 
@@ -25,6 +25,7 @@ No resources.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_name"></a> [name](#input\_name) | Stage action name for the CodeBuild project. | `string` | `"build"` | no |
 | <a name="input_naming_prefix"></a> [naming\_prefix](#input\_naming\_prefix) | Prefix for the provisioned resources. | `string` | `"platform"` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | Environment in which the resource should be provisioned like dev, qa, prod etc. | `string` | `"dev"` | no |
 | <a name="input_environment_number"></a> [environment\_number](#input\_environment\_number) | The environment count for the respective environment. Defaults to 000. Increments in value of 1 | `string` | `"000"` | no |
@@ -48,7 +49,7 @@ No resources.
 | <a name="input_extra_permissions"></a> [extra\_permissions](#input\_extra\_permissions) | List of action strings which will be added to IAM service account permissions. | `list(any)` | `[]` | no |
 | <a name="input_encryption_enabled"></a> [encryption\_enabled](#input\_encryption\_enabled) | When set to 'true' the resource will have AES256 encryption enabled by default | `bool` | `false` | no |
 | <a name="input_encryption_key"></a> [encryption\_key](#input\_encryption\_key) | AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build project's build output artifacts. | `string` | `null` | no |
-| <a name="input_create_projects"></a> [create\_projects](#input\_create\_projects) | Set to false, if you do not want to create a project. | `bool` | `true` | no |
+| <a name="input_create_projects"></a> [create\_projects](#input\_create\_projects) | Set to false, if you do not want to create multiple projects. | `bool` | `false` | no |
 | <a name="input_codebuild_projects"></a> [codebuild\_projects](#input\_codebuild\_projects) | List of CodeBuild projects to create. | `any` | `[]` | no |
 | <a name="input_pipeline_name"></a> [pipeline\_name](#input\_pipeline\_name) | Pipeline that created the codebuild. | `string` | `null` | no |
 | <a name="input_secondary_sources"></a> [secondary\_sources](#input\_secondary\_sources) | (Optional) secondary source for the codebuild project in addition to the primary location | <pre>list(object(<br>    {<br>      git_clone_depth     = number<br>      location            = string<br>      source_identifier   = string<br>      type                = string<br>      fetch_submodules    = bool<br>      insecure_ssl        = bool<br>      report_build_status = bool<br>  }))</pre> | `[]` | no |
