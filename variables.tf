@@ -10,6 +10,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+variable "name" {
+  description = "Stage action name for the CodeBuild project."
+  type        = string
+  default     = "build"
+}
+
 ### TF Module Resource variables
 variable "naming_prefix" {
   description = "Prefix for the provisioned resources."
@@ -167,8 +173,8 @@ variable "encryption_key" {
 
 variable "create_projects" {
   type        = bool
-  default     = true
-  description = "Set to false, if you do not want to create a project."
+  default     = false
+  description = "Set to false, if you do not want to create multiple projects."
 }
 
 variable "codebuild_projects" {

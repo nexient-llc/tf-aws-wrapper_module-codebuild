@@ -1,13 +1,12 @@
 # Replace the <> with the actual values
+
 naming_prefix   = "git-demo"
 source_type     = "GITHUB"
 artifact_type   = "NO_ARTIFACTS"
 source_location = "<github_repo_url>"
-codebuild_projects = [
-  {
-    name          = "deploy"
-    buildspec     = "buildspec.yml"
-    codebuild_iam = <<EOF
+name            = "deploy"
+buildspec       = "buildspec.yml"
+codebuild_iam   = <<EOF
 {
     "Version": "2012-10-17",
     "Statement": [
@@ -20,9 +19,6 @@ codebuild_projects = [
     ]
 }
 EOF
-
-  }
-]
 
 enable_github_authentication = true
 create_webhooks              = true
