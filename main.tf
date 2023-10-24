@@ -12,9 +12,9 @@
 
 module "codebuild" {
   source = "git::https://github.com/nexient-llc/terraform-aws-codebuild?ref=0.2.0"
-  count  = var.create_projects ? length(var.codebuild_projects) : 0
+  count  = var.create_projects ? length(var.codebuild_projects) : 1
 
-  project_name = replace(module.resource_names["codebuild"].standard, var.naming_prefix, "${var.naming_prefix}_${var.codebuild_projects[count.index].name}")
+  project_name = replace(module.resource_names["codebuild"].standard, var.naming_prefix, "${var.naming_prefix}_${try(var.codebuild_projects[count.index].name, var.name)}")
   description  = var.description
 
   artifact_location  = try(var.codebuild_projects[count.index].artifact_location, var.artifact_location)
@@ -32,23 +32,21 @@ module "codebuild" {
   source_location    = try(var.codebuild_projects[count.index].source_location, var.source_location)
   source_type        = try(var.codebuild_projects[count.index].source_type, var.source_type)
   secondary_sources  = try(var.codebuild_projects[count.index].secondary_sources, var.secondary_sources)
+  codebuild_iam      = try(var.codebuild_projects[count.index].codebuild_iam, var.codebuild_iam)
 
   build_image_pull_credentials_type = try(var.codebuild_projects[count.index].build_image_pull_credentials_type, var.build_image_pull_credentials_type)
-
-  codebuild_iam = try(var.codebuild_projects[count.index].codebuild_iam, var.codebuild_iam)
-
-  environment_variables = try(var.codebuild_projects[count.index].environment_variables, var.environment_variables)
+  environment_variables             = try(var.codebuild_projects[count.index].environment_variables, var.environment_variables)
 
   # Will authenticate with Github by using variable github_token
-  enable_github_authentication = var.enable_github_authentication
-  create_webhooks              = var.create_webhooks
+  enable_github_authentication = try(var.codebuild_projects[count.index].enable_github_authentication, var.enable_github_authentication)
+  create_webhooks              = try(var.codebuild_projects[count.index].create_webhooks, var.create_webhooks)
   # If set, this will automatically create an environment variable by name GITHUB_TOKEN
-  github_token       = var.github_token
-  github_token_type  = var.github_token_type
-  webhook_filters    = var.webhook_filters
-  webhook_build_type = var.webhook_build_type
+  github_token       = try(var.codebuild_projects[count.index].github_token, var.github_token)
+  github_token_type  = try(var.codebuild_projects[count.index].github_token_type, var.github_token_type)
+  webhook_filters    = try(var.codebuild_projects[count.index].webhook_filters, var.webhook_filters)
+  webhook_build_type = try(var.codebuild_projects[count.index].webhook_build_type, var.webhook_build_type)
 
-  tags = merge(local.tags, { resource_name = replace(module.resource_names["codebuild"].standard, var.naming_prefix, "${var.naming_prefix}_${var.codebuild_projects[count.index].name}") })
+  tags = merge(local.tags, { resource_name = replace(module.resource_names["codebuild"].standard, var.naming_prefix, "${var.naming_prefix}_${try(var.codebuild_projects[count.index].name, var.name)}") })
 }
 
 module "resource_names" {
