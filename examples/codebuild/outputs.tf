@@ -45,26 +45,3 @@ output "environment_number" {
   description = "The environment count for the respective environment. Defaults to 000. Increments in value of 1"
   value       = var.environment_number
 }
-
-output "region" {
-  description = "AWS Region in which the infra needs to be provisioned"
-  value       = replace(var.region, "-", "")
-}
-
-output "resource_number" {
-  description = "The resource count for the respective resource. Defaults to 000. Increments in value of 1"
-  value       = var.resource_number
-}
-
-
-output "resource_name" {
-  description = "A map of key to resource_name that will be used by cloudposse/label/null module to generate resource names"
-  value       = var.resource_names_map["codebuild"]["name"]
-}
-
-#code pipeline
-
-output "codepipeline_name" {
-  description = "Code Pipeline Name"
-  value       = module.codepipeline.id
-}
