@@ -16,12 +16,6 @@ variable "codebuild_projects" {
   description = "List of CodeBuild projects to create."
 }
 
-variable "create_projects" {
-  type        = bool
-  default     = false
-  description = "Set to false, if you do not want to create multiple projects."
-}
-
 ### TF Module Resource variables
 variable "naming_prefix" {
   description = "Prefix for the provisioned resources."
