@@ -16,7 +16,6 @@ variable "codebuild_projects" {
   description = "List of CodeBuild projects to create."
 }
 
-
 ### TF Module Resource variables
 variable "naming_prefix" {
   description = "Prefix for the provisioned resources."
@@ -35,25 +34,10 @@ variable "environment_number" {
   default     = "000"
 }
 
-variable "region" {
-  description = "AWS Region in which the infra needs to be provisioned"
-  default     = "us-east-1"
-}
-
 variable "resource_number" {
   description = "The resource count for the respective resource. Defaults to 000. Increments in value of 1"
   default     = "000"
 }
-
-# variable "resource_names_map" {
-#   description = "A map of key to resource_name that will be used by cloudposse/label/null module to generate resource names"
-#   type        = map(string)
-#   default = {
-#     codebuild  = "cb"
-#     iam_role   = "iamr",
-#     iam_policy = "iamp"
-#   }
-# }
 
 variable "resource_names_map" {
   description = "A map of key to resource_name that will be used by tf-module-resource_name to generate resource names"
@@ -75,24 +59,6 @@ variable "extra_permissions" {
   type        = list(any)
   default     = []
   description = "List of action strings which will be added to IAM service account permissions."
-}
-
-# Code Pipeline
-variable "create_s3_source" {
-  description = "Create S3 source bucket for CodePipeline."
-  type        = string
-  default     = false
-}
-
-variable "source_s3_bucket" {
-  description = "Name of the S3 source bucket."
-  type        = string
-  default     = null
-}
-
-variable "stages" {
-  description = "One or more stage blocks."
-  type        = any
 }
 
 variable "tags" {

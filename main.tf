@@ -12,7 +12,7 @@
 
 module "codebuild" {
   source = "git::https://github.com/nexient-llc/terraform-aws-codebuild?ref=0.2.0"
-  count  = var.create_projects ? length(var.codebuild_projects) : 1
+  count  = length(var.codebuild_projects) > 1 ? length(var.codebuild_projects) : 1
 
   project_name = replace(module.resource_names["codebuild"].standard, var.naming_prefix, "${var.naming_prefix}_${try(var.codebuild_projects[count.index].name, var.name)}")
   description  = var.description

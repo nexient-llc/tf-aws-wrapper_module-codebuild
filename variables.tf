@@ -171,12 +171,6 @@ variable "encryption_key" {
   description = "AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build project's build output artifacts."
 }
 
-variable "create_projects" {
-  type        = bool
-  default     = false
-  description = "Set to false, if you do not want to create multiple projects."
-}
-
 variable "codebuild_projects" {
   type        = any
   default     = []
