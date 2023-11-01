@@ -14,7 +14,7 @@ codebuild_projects = [
           "sts:AssumeRole"
         ],
         "Resource": [
-          "arn:aws:iam::12345678:role/testrole"
+          "*"
         ]
       }
     ]
@@ -34,7 +34,7 @@ EOF
           "sts:AssumeRole"
         ],
         "Resource": [
-          "arn:aws:iam::12345678:role/testrole"
+          "*"
         ]
       }
     ]
